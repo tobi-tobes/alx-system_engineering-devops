@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lamv --group-directories-first --indicator-style=slash
+ls -lamv --indicator-style=slash
