@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times with a while loop but will
+#+ display "bad luck" on the 4th iteration, "good luck" on the 8th iteration
+#+ and "Best School" otherwise
+
+times=0
+
+while [ $times -lt 10 ]
+do
+    if [ $times -eq 3 ]
+    then
+	echo "bad luck"
+    elif [ $times -eq 7 ]
+    then
+	echo "good luck"
+    else
+	echo "Best School"
+    fi
+    times=$((times + 1))
+done
