@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script prints all the numbers from 1 to 20 with a while loop but will
+#+ display "bad luck from China" on the 4th iteration, "bad luck from Japan"
+#+ on the 8th iteration, and "bad luck from Italy" on the 17th iteration as
+#+ well as the number itself at all times.
+
+n=1
+
+while [ $n -lt 21 ]
+do
+    echo $n
+    case "$n" in
+	4) echo "bad luck from China"
+	;;
+	9) echo "bad luck from Japan"
+	 ;;
+	17) echo "bad luck from Italy"
+    esac
+    n=$((n + 1))
+done
