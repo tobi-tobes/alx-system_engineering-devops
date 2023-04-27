@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times with a while loop but will
+#+ display "Hi" as well on the 9th iteration
+
+times=0
+
+while [ $times -lt 10 ]
+do
+    echo "Best School"
+    if [ $times -eq 8 ]
+    then
+	echo "Hi"
+    fi
+    times=$((times + 1))
+done
