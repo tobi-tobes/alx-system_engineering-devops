@@ -9,7 +9,7 @@ n=1
 
 while [ $n -gt 0 ]
 do
-    echo "I am alive!" > $file
+    echo "I am alive!" >> $file
     sleep 2
     n=$((n + 1))
 done
