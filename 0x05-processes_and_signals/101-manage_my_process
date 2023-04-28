@@ -5,23 +5,23 @@ file=/var/run/my_process.pid
 
 start() {
     touch "$file"
-    bash ./manage_my_process
-    pgrep -f "manage_my_process" > $file
+    bash ./manage_my_process &
+    pgrep -f "./manage_my_process" > $file
     echo "manage_my_process started"
 }
 
 stop() {
-    kill "$file"
+    kill "$(pgrep -f "./manage_my_process")"
     rm "$file"
     echo "manage_my_process stopped"
 }
 
 restart() {
-    kill "$file"
+    kill "$(pgrep -f "./manage_my_process")"
     rm "$file"
     touch "$file"
-    bash ./manage_my_process
-    pgrep -f "manage_my_process" > $file
+    bash ./manage_my_process &
+    pgrep -f "./manage_my_process" > $file
     echo "manage_my_process restarted"
 }
 
