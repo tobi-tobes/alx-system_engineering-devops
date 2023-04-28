@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script displays `To infinity and beyond` indefinitely with some extra
+#+ caveats
+
+file="/var/run/myscript.pid"
+touch "$file"
+echo $$ > $file
+
+trap "echo Y U no love me?!" SIGINT
+trap 'echo I hate the kill command; rm $file; exit' SIGTERM
+trap 'rm $file; exit' SIGQUIT
+
+n=1
+
+while [ $n -gt 0 ]
+do
+    echo "To infinity and beyond"
+    sleep 2
+    n=$((n + 1))
+done
