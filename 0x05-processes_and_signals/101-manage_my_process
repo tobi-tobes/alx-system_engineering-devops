@@ -5,20 +5,22 @@ file=/var/run/my_process.pid
 
 start() {
     touch "$file"
+    bash ./manage_my_process
     pgrep -f "manage_my_process" > $file
     echo "manage_my_process started"
 }
 
 stop() {
-    kill "$(pgrep -f "manage_my_process")"
+    kill "$file"
     rm "$file"
     echo "manage_my_process stopped"
 }
 
 restart() {
-    kill "$(pgrep -f "manage_my_process")"
+    kill "$file"
     rm "$file"
     touch "$file"
+    bash ./manage_my_process
     pgrep -f "manage_my_process" > $file
     echo "manage_my_process restarted"
 }
