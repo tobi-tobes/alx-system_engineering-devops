@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# This script manages manage_my_process
+
+file=/var/run/my_process.pid
+
+start() {
+    touch "$file"
+    pgrep -f "manage_my_process" > $file
+    echo "manage_my_process started"
+}
+
+stop() {
+    kill "$(pgrep -f "manage_my_process")"
+    rm "$file"
+    echo "manage_my_process stopped"
+}
+
+restart() {
+    kill "$(pgrep -f "manage_my_process")"
+    rm "$file"
+    touch "$file"
+    pgrep -f "manage_my_process" > $file
+    echo "manage_my_process restarted"
+}
+
+case "$1" in
+    start) start
+    ;;
+    stop) stop
+    ;;
+    restart) restart
+    ;;
+    *) echo "Usage: manage_my_process {start|stop|restart}"
+esac
