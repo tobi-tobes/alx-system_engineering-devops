@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # This script manages manage_my_process
 
-file=/var/run/my_process.pid
+file="/var/run/my_process.pid"
 
 start() {
     touch "$file"
