@@ -1,8 +1,7 @@
 # sets up your SSH configuration file to connect to server without a password
-$my_ssh_config = "/home/.ssh/config"
+$my_ssh_config = "/root/.ssh/config"
 
-file { '/home/.ssh/config':
-  path   => $my_ssh_config,
+file { '/root/.ssh/config':
   ensure => present,
 }
 
