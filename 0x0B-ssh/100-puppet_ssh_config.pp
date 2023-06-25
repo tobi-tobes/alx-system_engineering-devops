@@ -1,16 +1,19 @@
 # sets up your SSH configuration file to connect to server without a password
-file { '/etc/ssh/ssh_config':
+file { '~/.ssh/config':
   ensure => present,
+}
+
+file_line { 'Host':
+  path => '~/.ssh/config',
+  line => 'Host *',
 }
 
 file_line { 'Declare identity file':
-  path => '/etc/ssh/ssh_config',
-  line => '#   IdentityFile ~/.ssh/school',
+  path => '~/.ssh/config',
+  line => '    IdentityFile ~/.ssh/school',
 }
 
 file_line { 'Turn off password authentication':
-  ensure => present,
-  path   => '/etc/ssh/ssh_config',
-  line   => '#   BatchMode yes',
-  match  => '^#\ \ \ BatchMode',
+  path   => '~/.ssh/config',
+  line   => '    BatchMode yes',
 }
