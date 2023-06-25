@@ -19,3 +19,13 @@ file_line { 'Turn off password authentication':
   path => $my_ssh_config,
   line => '     BatchMode yes',
 }
+
+file_line { 'Turn off password authentication':
+  path => $my_ssh_config,
+  line => '     PreferredAuthentications publickey',
+}
+
+file_line { 'Turn off password authentication':
+  path => $my_ssh_config,
+  line => '     PasswordAuthentication no',
+}
