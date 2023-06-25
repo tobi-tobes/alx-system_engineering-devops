@@ -14,6 +14,6 @@ file_line { 'Declare identity file':
 }
 
 file_line { 'Turn off password authentication':
-  path   => '~/.ssh/config',
-  line   => '    BatchMode yes',
+  path => '~/.ssh/config',
+  line => '    BatchMode yes',
 }
