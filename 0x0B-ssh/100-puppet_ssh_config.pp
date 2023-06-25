@@ -1,19 +1,22 @@
 # sets up your SSH configuration file to connect to server without a password
-file { '~/.ssh/ssh_config':
+$my_ssh_config = "/home/.ssh/config"
+
+file { '/home/.ssh/config':
+  path   => $my_ssh_config,
   ensure => present,
 }
 
 file_line { 'Host':
-  path => '~/.ssh/ssh_config',
+  path => $my_ssh_config,
   line => 'Host 54.160.124.170',
 }
 
 file_line { 'Declare identity file':
-  path => '~/.ssh/ssh_config',
+  path => $my_ssh_config,
   line => '     IdentityFile ~/.ssh/school',
 }
 
 file_line { 'Turn off password authentication':
-  path => '~/.ssh/ssh_config',
+  path => $my_ssh_config,
   line => '     BatchMode yes',
 }
