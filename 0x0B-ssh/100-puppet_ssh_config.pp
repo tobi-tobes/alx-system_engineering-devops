@@ -7,11 +7,11 @@ file { '/etc/ssh/ssh_config':
 
 file_line { 'Declare identity file':
   path => $my_ssh_config,
-  line => '#    IdentityFile ~/.ssh/school',
+  line => '#   IdentityFile ~/.ssh/school',
 }
 
 file_line { 'Turn off password authentication':
   path  => $my_ssh_config,
-  line  => '#   BatchMode yes',
-  match => '#\ \ \ BatchMode',
+  line  => '#   PasswordAuthentication no',
+  match => '#\ \ \ PasswordAuthentication',
 }
