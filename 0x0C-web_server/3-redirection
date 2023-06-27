@@ -7,14 +7,5 @@ sudo bash -c 'cat > /var/www/html/index.html << EOF
 Hello World!
 EOF'
 sudo /etc/init.d/nginx start
-sudo bash -c 'cat > /etc/nginx/sites-available/redirect.conf << EOF
-server {
-    listen 80;
-    server_name _;
-    location /redirect_me {
-           rewrite ^/redirect_me$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-    }
-}
-EOF'
-sudo ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/
+sudo sed -i '/^\s*server_name _;/a \ \ \ \ location \/redirect_me { rewrite ^ https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4\$request_uri? permanent; }' /etc/nginx/sites-available/default
 sudo /etc/init.d/nginx reload
