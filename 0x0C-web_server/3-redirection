@@ -2,10 +2,6 @@
 # A script that configures a new Ubuntu machine with Nginx installation
 sudo apt-get -y update
 sudo apt-get -y install nginx
-sudo touch /var/www/html/index.html
-sudo bash -c 'cat > /var/www/html/index.html << EOF
-Hello World!
-EOF'
 sudo /etc/init.d/nginx start
 sudo sed -i '/^\s*server_name _;/a \ \ \ \ location \/redirect_me { return 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4\$request_uri; }' /etc/nginx/sites-enabled/default
 sudo /etc/init.d/nginx reload
