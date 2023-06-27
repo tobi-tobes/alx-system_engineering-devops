@@ -7,7 +7,7 @@ sudo bash -c 'cat > /var/www/html/index.html << EOF
 Hello World!
 EOF'
 sudo /etc/init.d/nginx start
-sudo bash -c 'cat > /etc/nginx/sites-available/redirect.conf << EOF
+sudo bash -c "cat > /etc/nginx/sites-available/redirect.conf << EOF
 server {
     listen 80;
     server_name _;
@@ -15,6 +15,6 @@ server {
            return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4$request_uri;
     }
 }
-EOF'
+EOF"
 sudo ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/
 sudo /etc/init.d/nginx reload
