@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# A script that configures a new Ubuntu machine with Nginx installation
+filename="/etc/nginx/sites-available/default"
+new_string="        location /redirect_me {/n                return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n        }\n\n        # pass PHP scripts to FastCGI server"
+old_string="        # pass PHP scripts to FastCGI server"
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo touch /var/www/html/index.html
+sudo bash -c 'cat > /var/www/html/index.html << EOF
+Hello World!
+EOF'
+sed -i "s/$old_string/$new_string/" $filename
+sudo /etc/init.d/nginx start
