@@ -23,7 +23,7 @@ file { '/var/www/html/index.html':
 
 file_line { 'create code 301 redirect':
   path   => '/etc/nginx/sites-enabled/default',
-  line   => '        location /redirect_me {\n           rewrite ^/(.*)$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n        }',
+  line   => '        rewrite ^/redirect_me$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
   after  => '^\s+server_name _;',
   notify => Service['nginx'],
 }
