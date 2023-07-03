@@ -9,7 +9,7 @@ Hello World!
 EOF'
 
 # shellcheck disable=SC2154
-sudo sed -i "/\s*location\s\/\s{/a \ \ \ \ \ \ \ \ add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
+sudo sed -i "/\s*location\s\/\s{/a \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
 sudo sed -i '/^\s*server_name _;/a \ \ \ \ \ \ \ \ location /redirect_me {\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rewrite ^/(.*)$ https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;\n\ \ \ \ \ \ \ \ }' /etc/nginx/sites-enabled/default
 sudo touch /var/www/html/error404.html
 sudo bash -c "cat > /var/www/html/error404.html << EOF
