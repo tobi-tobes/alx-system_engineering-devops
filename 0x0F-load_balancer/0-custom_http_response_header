@@ -3,6 +3,7 @@
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
+sudo service nginx start
 sudo touch /var/www/html/index.html
 sudo bash -c 'cat > /var/www/html/index.html << EOF
 Hello World!
