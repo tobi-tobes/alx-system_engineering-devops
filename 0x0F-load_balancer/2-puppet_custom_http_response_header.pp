@@ -1,5 +1,5 @@
 # Installs and configures Nginx Web Server
-$hostname = $::facts['networking']['hostname']
+$host_name = $::hostname
 
 exec { 'update':
   command => 'apt-get -y update',
@@ -25,7 +25,7 @@ file { '/var/www/html/index.html':
 
 file_line { 'create a custom HTTP header response':
   path   => '/etc/nginx/sites-enabled/default',
-  line   => '        add_header X-Served-By ${hostname};',
+  line   => '        add_header X-Served-By ${host_name};',
   after  => '^\s*server_name _;',
   notify => Service['nginx'],
 }
