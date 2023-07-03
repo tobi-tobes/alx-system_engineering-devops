@@ -4,6 +4,7 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo service nginx start
+
 sudo touch /var/www/html/index.html
 sudo bash -c 'cat > /var/www/html/index.html << EOF
 Hello World!
@@ -11,11 +12,5 @@ EOF'
 
 # shellcheck disable=SC2154
 sudo sed -i "/^\s*location\s\/\s{/a \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ add_header\ X-Served-By\ $HOSTNAME;" /etc/nginx/sites-enabled/default
-sudo sed -i '/^\s*server_name _;/a \ \ \ \ \ \ \ \ location /redirect_me {\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rewrite ^/(.*)$ https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;\n\ \ \ \ \ \ \ \ }' /etc/nginx/sites-available/default
-sudo touch /var/www/html/error404.html
-sudo bash -c "cat > /var/www/html/error404.html << EOF
-Ceci n'est pas une page
-EOF"
-sudo sed -i '/^\s*server_name _;/a \ \ \ \ \ \ \ \ error_page\ 404\ /error404.html;' /etc/nginx/sites-available/default
 
 sudo service nginx reload
