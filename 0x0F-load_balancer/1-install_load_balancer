@@ -6,7 +6,7 @@ sudo apt-get -y install haproxy
 printf "\nENABLED=1" >> /etc/default/haproxy
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
 sudo sed -i 's|\tmode\s*http|\tmode    tcp|g' /etc/haproxy/haproxy.cfg
-sudo sed -i 's|\toption\s*tcplog|\toption  tcplog|g' /etc/haproxy/haproxy.cfg
+sudo sed -i 's|\toption\s*httplog|\toption  tcplog|g' /etc/haproxy/haproxy.cfg
 printf "\n\nfrontend www\n\tbind *:80\n\tdefault_backend web_backend\n" >> /etc/haproxy/haproxy.cfg
 printf "\nbackend web_backend\n\tbalance roundrobin\n\tmode tcp\n\tserver 221506-web-01 54.160.124.170:80 check\n\tserver 221506-web-02 52.205.97.123:80 check\n" >> /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
