@@ -3,6 +3,12 @@
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
+sudo touch /var/www/html/index.html
+sudo bash -c 'cat > /var/www/html/index.html << EOF
+Hello World!
+EOF'
+
+# shellcheck disable=SC2154
 sudo sed -i "/\s*types_hash_max_size\s2048;/a \ \ \ \ \ \ \ \ add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
+
 sudo service nginx reload
-shellcheck -e SC2154 0-custom_http_response_header
