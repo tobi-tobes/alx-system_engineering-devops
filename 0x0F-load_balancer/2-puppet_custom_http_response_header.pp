@@ -24,9 +24,9 @@ file { '/var/www/html/index.html':
 }
 
 file_line { 'create a custom HTTP header response':
-  path   => '/etc/nginx/sites-available/default',
+  path   => '/etc/nginx/sites-enabled/default',
   line   => '        add_header X-Served-By ${host_name};',
-  after  => '^\s*location\s\/\s{',
+  after  => '^\s*server_name _;',
   notify => Service['nginx'],
 }
 
