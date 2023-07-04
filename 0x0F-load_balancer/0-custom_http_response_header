@@ -1,23 +1,36 @@
 #!/usr/bin/env bash
-# A script that configures a new Ubuntu machine with Nginx installation
+# bash: script to install and configure Nginx web server and add custom response header
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo service nginx start
+sudo apt-get update -y
+sudo apt-get install -y nginx
 
-sudo touch /var/www/html/index.html
-sudo bash -c 'cat > /var/www/html/index.html << EOF
-Hello World!
-EOF'
+# create index.html file served out by server:
+# & configure the redirection and return error pages
+mkdir -p /var/www/html
+echo 'Hello World!' > /var/www/html/index.html
 
-# shellcheck disable=SC2154
-sudo sed -i "/^\s*server_name _;/a \ \ \ \ \ \ \ \ add_header\ X-Served-By\ $HOSTNAME;" /etc/nginx/sites-enabled/default
+echo "Ceci n'est pas une page" > /var/www/html/404.html
 
-sudo sed -i '/^\s*location\s\/\s{/a \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rewrite ^/redirect_me(.*)$ https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-enabled/default
-sudo touch /var/www/html/error404.html
-sudo bash -c "cat > /var/www/html/error404.html << EOF
-Ceci n'est pas une page
-EOF"
-sudo sed -i '/^\s*location\s\/\s{/a \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error_page\ 404\ /error404.html;' /etc/nginx/sites-enabled/default
+# configure Nginx
+# and with custom response header configuration:
+printf %s "server {
+     listen      80 default_server;
+     listen      [::]:80 default_server;
+     root        /var/www/html;
+     index       index.html index.htm;
+
+     location	  /redirect_me {
+     		   return  301 https://stackoverflow.com/;
+     }
+
+     error_page	404 /404.html;
+     location	/404 {
+     		 root	/var/www/html;
+		  internal;
+     }
+
+     add_header X-Served-By \$hostname;
+}
+" > /etc/nginx/sites-available/default
 
 sudo service nginx restart
