@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Fixes issues with Nginx installation
+
+# Confirm that Nginx is running
+sudo service nginx start
+
+# Make changes to configuration files
+sudo sed -i 's/^\s*ipv6only=True$//' /etc/nginx/sites-available/default
+sudo sed -i 's/^\s*ipv6only=True$//' /etc/nginx/sites-enabled/default
+sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+
+# Restart Nginx to apply changes
+sudo service nginx restart
