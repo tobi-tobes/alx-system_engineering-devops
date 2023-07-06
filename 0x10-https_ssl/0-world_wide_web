@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# A script that displays information about subdomains.
+
+# Runs if only the domain is given on command line
+print_func1() {
+    arg=$1
+    arr=("www" "lb-01" "web-01" "web-02")
+    for i in "${arr[@]}"
+    do
+        sub="${i}.${arg}"
+	# shellcheck disable=SC2086
+        record=$(dig ${sub} | grep -A1 'ANSWER SECTION:' | awk 'FNR == 2{print $4}')
+	# shellcheck disable=SC2086
+        ip=$(dig ${sub} | grep -A1 'ANSWER SECTION:' | awk 'FNR == 2{print $5}')
+        echo "The subdomain $i is a $record record and points to $ip"
+    done
+}
+
+# Runs if both domain and subdomain are given
+print_func2() {
+    domain=$1
+    subdomain=$2
+    full="${subdomain}.${domain}"
+    # shellcheck disable=SC2086
+    record=$(dig ${full} | grep -A1 'ANSWER SECTION:' | awk 'FNR == 2{print $4}')
+    # shellcheck disable=SC2086
+    ip=$(dig ${full} | grep -A1 'ANSWER SECTION:' | awk 'FNR == 2{print $5}')
+    echo "The subdomain $subdomain is a $record record and points to $ip"
+}
+
+len=$#
+
+# Controls which function to run
+if [ $len -eq 2 ]
+then
+    # shellcheck disable=SC2086
+    print_func2 $1 $2
+else
+    # shellcheck disable=SC2086
+    print_func1 $1
+fi
