@@ -29,9 +29,7 @@ len=$#
 # Controls which function to run
 if [ $len -eq 2 ]
 then
-    # shellcheck disable=SC2086
     print_func2 "$1" "$2"
 else
-    # shellcheck disable=SC2086
     print_func1 "$1"
 fi
