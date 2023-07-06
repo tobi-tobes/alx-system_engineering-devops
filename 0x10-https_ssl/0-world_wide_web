@@ -27,7 +27,7 @@ print_func2() {
 len=$#
 
 # Controls which function to run
-if [ $len -eq 2 ]
+if [ "$len" -eq 2 ]
 then
     print_func2 "$1" "$2"
 else
