@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Fixes issues with Nginx installation
 sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
-sudo service nginx stop
+sudo service nginx start
+pkill -o nginx
