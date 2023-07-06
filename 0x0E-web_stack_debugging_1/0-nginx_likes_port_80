@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Fixes issues with Nginx installation
 
+# Confirm that Nginx is installed
+sudo apt-get update -y
+sudo apt-get install -y nginx
+
 # Confirm that Nginx is running
 sudo service nginx start
 
