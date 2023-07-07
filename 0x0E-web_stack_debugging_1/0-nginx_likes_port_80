@@ -2,9 +2,9 @@
 # Fixes issues with Nginx installation
 
 # Make changes to configuration files
-sudo sed -i 's/^\s*ipv6only=True$//' /etc/nginx/sites-enabled/default
-sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
+sudo sed -i 's/^\s*ipv6only=True$//' /etc/nginx/sites-available/default
+
+sudo -ln /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Restart Nginx to apply changes
 sudo service nginx restart
