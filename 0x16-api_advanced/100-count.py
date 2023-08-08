@@ -56,12 +56,13 @@ def count_words(subreddit, word_list, after="",
     """ Count keywords in titles """
     for post in posts:
         title_words = post["data"]["title"].split(" ")
+        title_words_small = [i.lower() for i in title_words]
         for word in uniq_word_list:
-            if word in title_words:
+            if word in title_words_small:
                 if word in word_count:
-                    word_count[word] += title_words.count(word)
+                    word_count[word] += title_words_small.count(word)
                 else:
-                    word_count[word] = 1
+                    word_count[word] = title_words_small.count(word)
             else:
                 continue
 
