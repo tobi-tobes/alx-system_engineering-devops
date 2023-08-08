@@ -16,7 +16,7 @@ def recurse(subreddit, hot_list=[], after=""):
     """
     url = "https://www.reddit.com/r/{}/hot.json?after={}".\
         format(subreddit, after)
-    resp = requests.get(url, headers={'User-agent': '1-top_ten.py'},
+    resp = requests.get(url, headers={'User-agent': '2-recurse.py'},
                         allow_redirects=False)
 
     if resp.status_code != 200:
@@ -24,7 +24,7 @@ def recurse(subreddit, hot_list=[], after=""):
 
     data = resp.json()
 
-    if "after" not in data["data"]:
+    if not "after" in data["data"]:
         return hot_list
 
     posts = data["data"]["children"]
