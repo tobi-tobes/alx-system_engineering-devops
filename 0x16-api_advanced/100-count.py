@@ -21,10 +21,7 @@ def count_words(subreddit, word_list, after="",
     if len(uniq_word_list) == 0:
         for word in word_list:
             word = word.lower()
-            if word in uniq_word_list:
-                continue
-            else:
-                uniq_word_list.append(word)
+            uniq_word_list.append(word)
 
     """ Make request """
     url = "https://www.reddit.com/r/{}/hot.json?after={}".\
@@ -39,12 +36,15 @@ def count_words(subreddit, word_list, after="",
 
     """ Base Case """
     if "after" not in data["data"]:
+        if not word_count:
+            return
+
         keys = []
-        values = sorted(list(uniq_word_list.values()), reverse=True)
+        values = sorted(list(word_count.values()), reverse=True)
 
         for value in values:
-            for key in uniq_word_list.keys():
-                if uniq_word_list[key] and key not in keys:
+            for key in word_count.keys():
+                if word_count[key] == value and key not in keys:
                     keys.append(key)
 
         for key in keys:
@@ -59,7 +59,7 @@ def count_words(subreddit, word_list, after="",
         for word in uniq_word_list:
             if word in title_words:
                 if word in word_count:
-                    word_count[word] += 1
+                    word_count[word] += title_words.count(word)
                 else:
                     word_count[word] = 1
             else:
