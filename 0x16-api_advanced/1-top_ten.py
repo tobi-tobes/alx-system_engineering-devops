@@ -15,7 +15,7 @@ def top_ten(subreddit):
     10 hot posts listed for a given subreddit.
     """
     url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-    resp = requests.get(url, headers = {'User-agent': '1-top_ten.py'},
+    resp = requests.get(url, headers={'User-agent': '1-top_ten.py'},
                         allow_redirects=False)
 
     if resp.status_code != 200:

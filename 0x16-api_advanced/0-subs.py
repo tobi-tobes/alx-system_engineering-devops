@@ -15,7 +15,7 @@ def number_of_subscribers(subreddit):
     (not active users, total subscribers) for a given subreddit.
     """
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    resp = requests.get(url, headers = {'User-agent': '0-subs.py'},
+    resp = requests.get(url, headers={'User-agent': '0-subs.py'},
                         allow_redirects=False)
 
     if resp.status_code != 200:
