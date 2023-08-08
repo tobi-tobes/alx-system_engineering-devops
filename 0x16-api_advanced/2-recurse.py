@@ -24,7 +24,7 @@ def recurse(subreddit, hot_list=[], after=""):
 
     data = resp.json()
 
-    if not "after" in data["data"]:
+    if "after" not in data["data"]:
         return hot_list
 
     posts = data["data"]["children"]
