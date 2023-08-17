@@ -10,5 +10,5 @@ workers=$(pgrep -P "$master")
 # For each worker PID, send SIGHUP signal to restart process
 for worker in "${workers[@]}"
 do
-    kill -HUP "$worker"
+    kill -SIGHUP "$worker"
 done
