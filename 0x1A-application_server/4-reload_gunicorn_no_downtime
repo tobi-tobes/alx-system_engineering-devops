@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script reloads Gunicorn in a graceful way.
+
+# Retrieve master gunicorn process PID
+master=$(pgrep gunicorn | head -n 1)
+
+# Use master process PID to retrieve a list of worker PIDs
+workers=$(pgrep -P "$master")
+
+# For each worker PID, send SIGHUP signal to restart process
+for worker in "${workers[@]}"
+do
+    kill -HUP "$worker"
+done
