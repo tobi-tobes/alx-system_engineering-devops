@@ -5,7 +5,7 @@
 master=$(pgrep gunicorn | head -n 1)
 
 # Use master process PID to retrieve a list of worker PIDs
-workers=$(pgrep -P "$master")
+workers=($(pgrep -P "$master"))
 
 # For each worker PID, send SIGHUP signal to restart process
 for worker in "${workers[@]}"
